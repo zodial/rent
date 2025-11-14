@@ -8,4 +8,5 @@ require (
 	gorm.io/gorm v1.26.0
 	github.com/stretchr/testify v1.8.4
 	golang.org/x/crypto v0.9.0
+	github.com/golang-jwt/jwt/v5 v5.0.0
 )

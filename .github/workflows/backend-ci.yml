@@ -15,6 +15,12 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: '1.20'
+      - name: Debug Go environment
+        run: |
+          go version || true
+          go env || true
+          ls -la . || true
+          ls -la backend || true
       - name: Install dependencies
         run: |
           cd backend
@@ -28,4 +34,3 @@ jobs:
         with:
           name: coverage-report
           path: backend/coverage.out
-
