@@ -5,111 +5,125 @@
 **Status**: Draft  
 **Input**: User description: "$ARGUMENTS"
 
-## User Scenarios & Testing *(mandatory)*
+## Purpose (用户价值) *(mandatory)*
+
+[简短说明：本功能为何对用户/业务有价值。用一句话概括核心用户价值。]
+
+## Scope & Out-of-Scope
+
+- Includes: [列出当前交付范围]  
+- Excludes: [列出明确不包含的内容]
+
+## Prioritized User Scenarios & Acceptance Tests *(mandatory & test-first friendly)*
 
 <!--
-  IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
-  Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
-  you should still have a viable MVP (Minimum Viable Product) that delivers value.
-  
-  Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.
-  Think of each story as a standalone slice of functionality that can be:
-  - Developed independently
-  - Tested independently
-  - Deployed independently
-  - Demonstrated to users independently
+  IMPORTANT: 每个场景必须是一个可独立交付和测试的用户旅程。
+  优先级使用 P1 (必须)、P2 (重要)、P3 (可选)。
 -->
 
 ### User Story 1 - [Brief Title] (Priority: P1)
 
-[Describe this user journey in plain language]
+[用简短非技术语言描述用户旅程和预期价值]
 
-**Why this priority**: [Explain the value and why it has this priority level]
+**Why this priority**: [说明业务价值]
 
-**Independent Test**: [Describe how this can be tested independently - e.g., "Can be fully tested by [specific action] and delivers [specific value]"]
+**Independent Test / TDD guidance**: 
+- 测试类型：Unit / Integration / E2E
+- 必须先写失败测试：列出至少1个关键断言（例如：DB 中存在行；API 返回 201；权限为 403）
 
-**Acceptance Scenarios**:
+**Acceptance Scenarios (Given / When / Then)**:
 
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-2. **Given** [initial state], **When** [action], **Then** [expected outcome]
+1. **Given** [初始状态], **When** [动作], **Then** [预期结果: 可断言的输出或 DB 状态]
+2. **Given** [初始状态], **When** [动作], **Then** [预期结果]
+
+**Performance / Non-functional checks** (if applicable):
+- 关键路径响应阈值（例如：首交互 ≤ 100ms）或 CI 性能断言
 
 ---
 
 ### User Story 2 - [Brief Title] (Priority: P2)
 
-[Describe this user journey in plain language]
+[描述...]
 
-**Why this priority**: [Explain the value and why it has this priority level]
+**Why this priority**: [说明价值]
 
-**Independent Test**: [Describe how this can be tested independently]
+**Independent Test / TDD guidance**: [列出应该先编写的测试类型与关键断言]
 
-**Acceptance Scenarios**:
+**Acceptance Scenarios (Given / When / Then)**:
 
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
+1. **Given** ..., **When** ..., **Then** ...
 
 ---
 
 ### User Story 3 - [Brief Title] (Priority: P3)
 
-[Describe this user journey in plain language]
-
-**Why this priority**: [Explain the value and why it has this priority level]
-
-**Independent Test**: [Describe how this can be tested independently]
+[描述...]
 
 **Acceptance Scenarios**:
 
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
+1. **Given** ..., **When** ..., **Then** ...
 
 ---
 
-[Add more user stories as needed, each with an assigned priority]
+## Edge Cases *(must enumerate and make testable)*
 
-### Edge Cases
+- [边界情况 1] -> 预期行为与失败断言（例如：重复提交应返回 409）
+- [边界情况 2] -> 预期行为与失败断言
+- [错误场景] -> 例如：权限不足、网络超时、DB 约束冲突
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right edge cases.
--->
+## Requirements *(mandatory & testable)*
 
-- What happens when [boundary condition]?
-- How does system handle [error scenario]?
+### Functional Requirements (每项需可被自动化断言)
 
-## Requirements *(mandatory)*
+- **FR-001**: System MUST [清晰行为描述，可直接转化为测试断言]
+- **FR-002**: System MUST [清晰行为描述]
+- **FR-003**: System MUST [清晰行为描述]
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right functional requirements.
--->
+*If a requirement is unclear mark it as [NEEDS CLARIFICATION] with the specific question.*
 
-### Functional Requirements
+### Non-Functional Requirements
 
-- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
-- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
-- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
-- **FR-005**: System MUST [behavior, e.g., "log all security events"]
+- Performance: [例如：关键页面首交互 ≤ 100ms]
+- Security: [例如：敏感字段需在 DB 中加密存储]
+- Observability: [例如：关键写入必须产生日志和审计记录]
+- Test Coverage: [例如：Unit + Integration coverage >= 90%]
 
-*Example of marking unclear requirements:*
+## Data Model / Key Entities *(high-level, no implementation details)*
 
-- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
-- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
+- **EntityName**: { key_attr, key_attr }
+- **EntityName**: { relation: OtherEntity }
 
-### Key Entities *(include if feature involves data)*
+## Success Criteria *(mandatory & measurable)*
 
-- **[Entity 1]**: [What it represents, key attributes without implementation]
-- **[Entity 2]**: [What it represents, relationships to other entities]
+- **SC-001**: [业务可衡量指标，例如：用户能在移动端在 2 分钟内完成主要任务]
+- **SC-002**: [例如：API 在并发 N 个请求下响应不超过 X ms（如适用）]
+- **SC-003**: [测试覆盖率 >= 90% 并且 CI 在合并前强制校验]
+- **SC-004**: [如有性能目标，需在 PR 中附基准对比数据]
 
-## Success Criteria *(mandatory)*
+## Testing Guidance & CI Gates *(enforce TDD & automated checks)*
 
-<!--
-  ACTION REQUIRED: Define measurable success criteria.
-  These must be technology-agnostic and measurable.
--->
+- TDD rule: 开发时必须先添加失败测试（列出至少 1 个单元测试与 1 个集成测试）。
+- CI gates (must pass before merge): lint -> unit tests (coverage) -> integration tests -> performance checks (if provided).
+- 所有 PR 必须包含测试结果与覆盖率报告并在描述中引用关键断言。
 
-### Measurable Outcomes
+## API / UX Contracts *(optional but encouraged to include examples)*
 
-- **SC-001**: [Measurable metric, e.g., "Users can complete account creation in under 2 minutes"]
-- **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
-- **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
-- **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+- API: [HTTP verb] /path -> 请求体 / 响应示例 / 错误情形
+- UX: 简短说明关键界面与交互的必备元素（尤其针对移动端）
+
+## Implementation Notes & Constraints
+
+- Technology constraints (if any): [例如：Backend Go, Frontend Vue3+TS, SQLite]
+- 儿童条款：尽量避免引入非必要第三方库；任何新增依赖需在 PR 中说明理由。
+
+## Open Questions
+
+- Q1: [填入开放问题并标注影响范围]
+- Q2: [填入开放问题]
+
+## Change Log
+
+- [DATE] - Created by [AUTHOR]
+- [DATE] - Updated: [summary of changes]
+
+<!-- End of spec template -->
