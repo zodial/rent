@@ -8,14 +8,14 @@ import (
 
 // Administrator represents system users with roles.
 type Administrator struct {
-	ID        uint   `gorm:"primaryKey"`
-	TenantID  string `gorm:"index;not null;default:'default'"`
-	Name      string `gorm:"not null"`
-	Email     string `gorm:"uniqueIndex;not null"`
-	Password  string `gorm:"not null"`
-	Role      string `gorm:"index;not null"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ID           uint   `gorm:"primaryKey"`
+	TenantID     string `gorm:"index;not null;default:'default'"`
+	Name         string `gorm:"not null"`
+	Email        string `gorm:"uniqueIndex;not null"`
+	PasswordHash string `gorm:"not null"`
+	Role         string `gorm:"index;not null"`
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
 }
 
 // Property is a building or complex containing rooms.

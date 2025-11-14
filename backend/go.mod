@@ -7,5 +7,5 @@ require (
 	gorm.io/driver/sqlite v1.4.6
 	gorm.io/gorm v1.26.0
 	github.com/stretchr/testify v1.8.4
+	golang.org/x/crypto v0.9.0
 )
-
